@@ -2,7 +2,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 def main():
-    st.image("ternium_logo.png", width=100) 
+    st.image("images/ternium_logo.png", width=100) 
     st.header("Welcome back!")
     st.write("It’s time to get to work hard and analyze some data.")
     st.write("Here is a weekly quick summary")
