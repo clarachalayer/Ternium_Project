@@ -1,0 +1,33 @@
+SENSOR_NAME,NOMBRE DE VARIABLE,EJEMPLO,Unidades
+LAM.PLC41.G61_72NI,DC ENT WG WIDTH DEVIATION,"Valor de la desviación de ancho a la entrada de DC (cold, en mm). Valor directo del Instrumento WG5001, Real vs L2",mm
+LAM.PLC41.G500_40NI,DC ENT WIDTH METER ACTUAL,Resultado de la suma del ancho del rollo (cold) + Desviación de ancho (cold),mm
+LAM.PLC29.G61_126NI,PROFILE WIDTH DEVIATION,"Valor de la desviación de ancho a la salida del FM (cold,en mm), valor directo del PTG, real vs L2",mm
+LAM.PLC7.G61_91NI,R1 DEL WG WIDTH DEVIATION,"Valor de la desviación de ancho a la salida de R1 (hot, en mm). Valor directo del Instrumento WG3002, Real vs L2",mm
+LAM.PLC7.G200_399NI,R1 WIDTH ACTUAL VALUE,Medición de ancho real a la salida R1,mm
+LAM.PLC7.G200_533NI,R1 DELIVERY WIDTH SET,Referencia de ancho en punta a la entrada de R1 G_L2COM1_DTA.WT_B                                  Entry Slab Head End Width[mm],mm
+LAM.PLC7.G218_143NI,WIDTH SET CURRENT XXXX,"Referencia de ancho en cola a la entrada de R1   G_L2COM1_DTA.WB_B
+Entry Slab Tail End Width[mm]",mm
+LAM.PLC10.G200_400NI,R2 WIDTH ACTUAL VALUE,"Medición de ancho en la salida de R2, es el resultado de la suma del valor de ancho medido por el instrumento WG3003 + la desviación de ancho, dada por el mismo instrumento",mm
+LAM.PLC10.G200_534NI,R2 DELIVERY WIDTH SET,"Referencia de ancho en punta a la entrada de R2 G_L2COM2_DTA.WT_B
+Entry Slab Head End Width[mm]",mm
+LAM.PLC10.G219_403NI,R2 WIDTH SET CURRENT XXXX,Referencia de ancho en la cola a la entrada de R2 G_L2COM2_DTA.WB_B LEntry Slab Tail End Width[mm],mm
+LAM.PLC4.G200_623NI,SSP ESG ENT CC MEASURED WIDTH,Fbk de gap guías de entrada SSP lado entrada (mm) al hacer el centrado del planchón,mm
+LAM.PLC4.G200_624NI,SSP ESG DEL CC MEASURED WIDTH,Fbk de gap guías de entrada SSP lado salida (mm) al hacer el centrado del planchón,mm
+LAM.PLC4.G200_924NI,SSP ENT1 WIDTH ACTUAL VALUE,"Medición del ancho del planchón a la entrada del SSP, dado por el instrumento WG3001",mm
+LAM.PLC4.G214_79NI,WIDTH ADJ ACTUAL TOTAL,"GAP total del Width adjust SSP, obtenido de la suma del  Fbk WS+DS de width adjust a 180°",mm
+LAM.PLC4.G234_11NI,SLAB HEAD WIDTH BEF PRESS,"Ancho de punta de planchón antes de prensar, dato de L2",mm
+LAM.PLC4.G234_12NI,SLAB MIDDLE WIDTH BEF PRESS,"Ancho de parte media de planchón antes de prensar, dato de L2",mm
+LAM.PLC4.G234_13NI,SLAB TAIL WIDTH BEF PRESS,"Ancho de cola de planchón antes de prensar, dato de L2",mm
+LAM.PLC4.G234_16NI,SLAB HEAD WIDTH AFTER PRESS,"Ancho de punta de planchón después de prensar, dato de L2",mm
+LAM.PLC4.G234_17NI,SLAB MIDDLE WIDTH AFT PRESS,"Ancho de parte media de planchón después de prensar, dato de L2",mm
+LAM.PLC4.G234_18NI,SLAB TAIL WIDTH AFTER PRESS,"Ancho de cola de planchón después de prensar, dato de L2",mm
+LAM.PLC4.G61_213NI,SSP ENT WG WIDTH DEVIATION,"Valor de la desviación de ancho a la entrada de SSP (hot, en mm). Valor directo del Instrumento WG3001, Real vs L2",mm
+LAM.PLC4.G280_181NI,SSP WIDTH ADJ DS ACT VAL,fbk Width Adjust lado DS,mm
+LAM.PLC4.G280_191NI,SSP WIDTH ADJ WS ACT VAL,fbk Width Adjust lado WS,mm
+LAM.PLC4.G240_21NI,CURRENT ANVIL WIDTH DS TOP,Espesor/ancho del anvil DS superior en uso,mm
+LAM.PLC4.G240_36NI,CURRENT ANVIL WIDTH WS TOP,Espesor/ancho del anvil WS superior en uso,mm
+LAM.PLC4.G240_51NI,CURRENT ANVIL WIDTH DS BOT,Espesor/ancho del anvil DS inferior en uso,mm
+LAM.PLC4.G240_66NI,CURRENT ANVIL WIDTH WS BOT,Espesor/ancho del anvil WS inferior en uso,mm
+LAM.PLC29.G401_292NI,EXIT WIDTH SET,"Ancho de salida F7, dato de L2",mm
+LAM.PLC29.G401_293NI,EXIT WIDTH ACT,"Ancho de salida F7, resultado de la suma del valor en EXIT WIDTH SET + desviación de ancho, obtenida del instrumento WG4044",mm
+LAM.PLC29.G61_282NI,FM DEL WG WIDTH DEVIATION,"Valor de la desviación de ancho en la salida de F7, obtenida del instrumento WG4004 (en mm)",mm

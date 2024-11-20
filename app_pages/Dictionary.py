@@ -1,0 +1,110 @@
+# En cada archivo de página (como Home.py, Predictions.py, etc.)
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def main():
+    st.image("images/logo.png", width=100)
+    st.header("Dictionary")
+
+    st.markdown("### Sensor Dictionary ")
+
+    #Data for the table
+    df = pd.read_csv("datasets/Dicc_sensors.csv")
+
+        #Show table
+    st.dataframe(df,height = 500)
+
+    #Categories image
+    st.markdown("### Categories")
+        #Para poner los tipos de coil horizontal
+    col1, col2, col3 = st.columns([8, 8, 8])
+    selected_df = None
+    with col1:
+        st.image("images/soft_coil.png", width=290)
+
+        # Añadir el botón de Streamlit con CSS para centrarlo
+        centered_button = st.markdown(
+            """
+            <style>
+            div.stButton > button {
+                display: block;
+                margin: auto;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+        if st.button("Soft"):
+            selected_df = pd.read_csv("datasets/Soft_Coil.csv")
+
+    with col2:
+        st.image("images/medium_coil.png", width=160)
+        # Añadir el botón de Streamlit con CSS para centrarlo
+        centered_button = st.markdown(
+            """
+            <style>
+            div.stButton > button {
+                display: block;
+                margin: auto;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+        if st.button("Medium"):
+            selected_df = pd.read_csv("datasets/Medium_Coil.csv")
+
+    with col3:
+        st.image("images/hard_coil.png", width=210)
+        # Añadir el botón de Streamlit con CSS para centrarlo
+        centered_button = st.markdown(
+            """
+            <style>
+            div.stButton > button {
+                display: block;
+                margin: auto;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+        if st.button("Hard"):
+            selected_df = pd.read_csv("datasets/Hard_Coil.csv")
+
+
+    # Muestra el DataFrame seleccionado en pantalla completa fuera de las columnas
+    if selected_df is not None:
+        st.write("### Datos Seleccionados")
+        st.dataframe(selected_df, use_container_width=True)
+
+    # Pie de página
+    st.markdown(
+        """
+        <style>
+        /* Footer fijo en la parte inferior */
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #000000;
+            color: white;
+            text-align: right;
+            padding: 10px;
+            font-size: 14px;
+        }
+        /* Ajuste del padding inferior para que no se superponga el contenido con el footer */
+        .main > div {
+            padding-bottom: 50px;
+        }
+        </style>
+        <div class="footer">
+            Seiketsu Consulting &copy; 2023
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
