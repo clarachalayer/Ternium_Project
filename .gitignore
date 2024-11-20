@@ -1,0 +1,16 @@
+# Ignorar el entorno virtual
+ternium_webapp/
+.env/
+
+# Archivos temporales de Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Archivos de configuración específicos del editor
+.vscode/
+.idea/
+
+# Archivos grandes o sensibles
+*.log
+.DS_Store

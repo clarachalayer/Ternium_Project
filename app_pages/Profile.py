@@ -1,7 +1,7 @@
 import streamlit as st
 
 def main():
-    st.image("ternium_logo.png", width=140) 
+    st.image("images/ternium_logo.png", width=140) 
     # Encabezado de la página de perfil
     st.title("Perfil de Usuario")
     st.write("Aquí puedes ver la información básica de tu perfil.")
@@ -12,14 +12,14 @@ def main():
 
         # Foto de perfil
         with col1:
-            st.image("profile_image.png", width=150)  # Asegúrate de que la imagen esté en la ruta correcta
+            st.image("images/profile_image.png", width=150)  # Asegúrate de que la imagen esté en la ruta correcta
 
         # Información del usuario
         with col2:
-            st.subheader("Sarah Connor")
-            st.write("sarahc@gmail.com")
-            st.write("📍 San Francisco, CA")
-            st.write("🔶 Experiencia en análisis de datos y gestión de proyectos.")
+            st.subheader("Team 4 Seiketsu")
+            st.write("seiketsu@gmail.com")
+            st.write("📍 Monterrey, NL")
+            st.write("🔶 Análisis de datos y gestión de proyectos.")
 
     st.markdown("---")
 

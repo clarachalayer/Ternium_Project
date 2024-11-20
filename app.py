@@ -15,19 +15,19 @@ with st.sidebar:
     # Imagen de perfil centrada con columnas
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.image("./profile_image.png", width=140)
+        st.image("images/profile_image.png", width=140)
 
     # Información del usuario
     st.markdown("""
     <div class="user-info" style="text-align: center; padding: 2px 0;">
-        <strong style="font-size: 17px;">Sarah Connor</strong><br>
-        <span style="font-size: 14px; color: gray;">sarahc@gmail.com</span><br>
+        <strong style="font-size: 17px;">Seiketsu</strong><br>
+        <span style="font-size: 14px; color: gray;">seiketsu@gmail.com</span><br>
     </div>
     """, unsafe_allow_html=True)
 
     # Menú de navegación con título e ícono centrados
     selected = option_menu(
-        menu_title="Ternium",
+        menu_title = None,
         options=["Home", "Predictions", "Sensor Visualization", 
                 "Cluster Specifications", "Dictionary", "Profile"],
         icons=["house", "bar-chart", "eye", "boxes", "book", "person"],
@@ -57,7 +57,7 @@ with st.sidebar:
     # Logo de Ternium centrado con columnas
     col1, col2, col3 = st.columns([1, 3, 1])
     with col2:
-        st.image("./ternium_logo.png", width=200)
+        st.image("images/ternium_logo.png", width=200)
 
 # Enrutamiento de páginas
 # Llama a la función `main()` de cada archivo de acuerdo con la selección
