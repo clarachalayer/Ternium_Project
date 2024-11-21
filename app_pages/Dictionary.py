@@ -7,14 +7,10 @@ def main():
     st.image("images/logo.png", width=100)
     st.header("Dictionary")
 
-    st.markdown("### Sensor Dictionary ")
-
     #Data for the table
     df = pd.read_csv("datasets/Dicc_sensors.csv")
 
     # Add a filter in the sidebar
-    st.subheader("Filter Options")
-
     filter_variable = "SENSOR_NAME"
 
     # Example: Filter by a specific column
