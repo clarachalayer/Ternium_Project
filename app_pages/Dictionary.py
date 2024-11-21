@@ -12,8 +12,25 @@ def main():
     #Data for the table
     df = pd.read_csv("datasets/Dicc_sensors.csv")
 
-        #Show table
-    st.dataframe(df,height = 500)
+    # Add a filter in the sidebar
+    st.subheader("Filter Options")
+
+    filter_variable = "SENSOR_NAME"
+
+    # Example: Filter by a specific column
+    unique_values = df[filter_variable].unique()
+    options = ['NONE'] + list(unique_values)
+    selected_value = st.selectbox("Select the sensor you want to look for:", options)
+
+    if selected_value == "NONE":
+        st.dataframe(df,height = 500)
+        filtered_df = df
+    else:
+    # Filter the dataset based on the selection
+        filtered_df = df[df[filter_variable] == selected_value]
+
+    #Show table
+    #st.dataframe(df,height = 500)
 
     #Categories image
     st.markdown("### Categories")
