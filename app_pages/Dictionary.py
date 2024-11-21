@@ -24,10 +24,11 @@ def main():
 
     if selected_value == "NONE":
         st.dataframe(df,height = 500)
-        filtered_df = df
+        
     else:
     # Filter the dataset based on the selection
         filtered_df = df[df[filter_variable] == selected_value]
+        st.dataframe(filtered_df)
 
     #Show table
     #st.dataframe(df,height = 500)
