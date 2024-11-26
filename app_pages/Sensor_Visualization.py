@@ -1,52 +1,86 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 def main():
-    st.header("Bienvenido a la página principal")
-    st.write("Este es el contenido de la página Sensor Visualization.")
-    df = pd.read_csv("datasets/filtered_data.csv")
+    # Cargar el dataset procesado
+    file_path = "datasets/filtered_data.csv"  # Ruta actualizada del archivo procesado
+    df = pd.read_csv(file_path)
 
-    # Add a filter in the sidebar
-    st.subheader("Filter Options")
+    # Asegurarse de que las columnas X y Y se lean como listas
+    import ast
+    df['X'] = df['X'].apply(ast.literal_eval)
+    df['Y'] = df['Y'].apply(ast.literal_eval)
 
-    filter_variable = "material_salida"
+    # Página de visualización
+    st.title("Sensor Visualization")
 
-    # Example: Filter by a specific column
-    unique_values = df[filter_variable].unique()
-    options = ['NONE'] + list(unique_values)
-    selected_value = st.selectbox("Select a value to filter:", options)
+    # Filtros: Material de salida y sensor (tag)
+    material_salida_options = ["NONE", "Show All"] + df['material_salida'].unique().tolist()
+    selected_material = st.selectbox("Select Material de Salida", material_salida_options)
 
-    if selected_value == "NONE":
-        filtered_df = df
+    if selected_material not in ["NONE", "Show All"]:
+        tag_options = ["NONE", "Show All"] + df[df['material_salida'] == selected_material]['tag'].unique().tolist()
     else:
-    # Filter the dataset based on the selection
-        filtered_df = df[df[filter_variable] == selected_value]
+        tag_options = ["NONE", "Show All"] + df['tag'].unique().tolist()
 
-    if not filtered_df.empty:
-        col1, col2 = st.columns([3,1])
+    selected_tag = st.selectbox("Select Sensor (Tag)", tag_options)
 
-        with col1:
+    # Checkbox para seleccionar el estado de Material (diseñado horizontalmente)
+    status_filter = st.radio(
+        "Select Material Status:",
+        options=["Both", "Aprobado", "Defectuoso"],
+        index=0,
+        horizontal=True  # Opciones en formato horizontal
+    )
 
-            plt.figure(figsize=(10, 5))
-            plt.plot(
-                filtered_df['tag'],
-                filtered_df['Slab Thickness Encoded'],
-                marker='o',
-                linestyle='-',
-                color='#76D7C4',
-                label="Slab Thickness"
-            )
-            plt.xlabel("Material Salida")
-            plt.ylabel("Slab Thickness Encoded")
-            plt.title(f"Slab Thickness for Coil: {selected_value}")
-            plt.legend()
-            plt.xticks(rotation=45)
+    # Filtrar el dataframe según el estado seleccionado
+    if status_filter != "Both":
+        df = df[df['Material status'] == status_filter]
 
-            # Display the plot in Streamlit
-            st.pyplot(plt)
-        with col2:
-            st.write("Data Summary:")
-            st.write(filtered_df['material_salida'])
+    # Mostrar mensaje cuando no se selecciona ninguna opción válida
+    if selected_material == "NONE" or selected_tag == "NONE":
+        st.write("Choose an option from both filters to visualize a graph.")
     else:
-        st.write("No data available for the selected month.")
+        # Función para generar gráficos con colores basados en Material status
+        def plot_graph(x_values, y_values, title, status):
+            # Seleccionar el color basado en Material status
+            color = 'green' if status == 'Aprobado' else 'red'
+            fig, ax = plt.subplots(figsize=(12, 6))
+            ax.plot(x_values, y_values, marker='o', color=color)
+            ax.set_title(title, fontsize=16)
+            ax.set_xlabel("Time (s)", fontsize=14)
+            ax.set_ylabel("Y Values", fontsize=14)
+            ax.tick_params(axis='x', rotation=45)
+            st.pyplot(fig)
+
+        # Mostrar gráficos basados en la selección
+        if selected_material == "Show All" and selected_tag == "Show All":
+            st.write(f"Showing all {status_filter} sensors (tags) for all materials:")
+            grouped = df.groupby(['material_salida', 'tag'])
+            for (material, tag), group in grouped:
+                x_values = group.iloc[0]['X']
+                y_values = group.iloc[0]['Y']
+                status = group.iloc[0]['Material status']
+                plot_graph(x_values, y_values, f"{material} - {tag}", status)
+        elif selected_material != "Show All" and selected_tag == "Show All":
+            st.write(f"Showing all {status_filter} sensors (tags) for material: {selected_material}")
+            filtered_df = df[df['material_salida'] == selected_material]
+            for tag in filtered_df['tag'].unique():
+                group = filtered_df[filtered_df['tag'] == tag].iloc[0]
+                x_values = group['X']
+                y_values = group['Y']
+                status = group['Material status']
+                plot_graph(x_values, y_values, f"{selected_material} - {tag}", status)
+        elif selected_material != "Show All" and selected_tag != "Show All":
+            st.write(f"Showing graph for material: {selected_material}, sensor (tag): {selected_tag}")
+            filtered_df = df[(df['material_salida'] == selected_material) & (df['tag'] == selected_tag)]
+            if not filtered_df.empty:
+                group = filtered_df.iloc[0]
+                x_values = group['X']
+                y_values = group['Y']
+                status = group['Material status']
+                plot_graph(x_values, y_values, f"{selected_material} - {selected_tag}", status)
+            else:
+                st.write("No data available for this selection.")
