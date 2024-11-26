@@ -92,8 +92,9 @@ def main():
 
                 # Mostrar el gráfico en Streamlit
                 st.pyplot(fig)
-                
-        st.markdown(
+                           
+    # Pie de página
+    st.markdown(
         """
         <style>
         /* Footer fijo en la parte inferior */
@@ -119,8 +120,7 @@ def main():
         """,
         unsafe_allow_html=True
     )
-            
-    
+
 
 
 
