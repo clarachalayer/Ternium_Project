@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from app_pages import Home, Predictions, Sensor_Visualization, Cluster_Specifications, Dictionary, Profile
+from app_pages import Home, Sensor_Visualization, Cluster_Specifications, Dictionary, Profile, Sensor_Classification
 
 st.set_page_config(
     page_title="Ternium",
@@ -28,9 +28,9 @@ with st.sidebar:
     # Menú de navegación con título e ícono centrados
     selected = option_menu(
         menu_title = None,
-        options=["Home", "Predictions", "Sensor Visualization", 
+        options=["Home", "Sensor Visualization", "Sensor Classification",
                 "Cluster Specifications", "Dictionary", "Profile"],
-        icons=["house", "bar-chart", "eye", "boxes", "book", "person"],
+        icons=["house", "bar-chart", "eye", "boxes", "book", "person", "bar-chart"],
         menu_icon="cast",
         default_index=0,
         styles={
@@ -63,8 +63,6 @@ with st.sidebar:
 # Llama a la función `main()` de cada archivo de acuerdo con la selección
 if selected == "Home":
     Home.main()
-elif selected == "Predictions":
-    Predictions.main()
 elif selected == "Sensor Visualization":
     Sensor_Visualization.main()
 elif selected == "Cluster Specifications":
@@ -73,3 +71,5 @@ elif selected == "Dictionary":
     Dictionary.main()
 elif selected == "Profile":
     Profile.main()
+elif selected == "Sensor Classification":
+    Sensor_Classification.main()

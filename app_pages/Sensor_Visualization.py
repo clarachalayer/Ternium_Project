@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def main():
+    st.image("images/logo.png", width=100)
+    
     # Cargar el dataset procesado
     file_path = "datasets/filtered_data.csv"  # Ruta actualizada del archivo procesado
     df = pd.read_csv(file_path)
@@ -84,3 +86,31 @@ def main():
                 plot_graph(x_values, y_values, f"{selected_material} - {selected_tag}", status)
             else:
                 st.write("No data available for this selection.")
+                
+        
+    st.markdown(
+        """
+        <style>
+        /* Footer fijo en la parte inferior */
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #000000;
+            color: white;
+            text-align: right;
+            padding: 10px;
+            font-size: 14px;
+        }
+        /* Ajuste del padding inferior para que no se superponga el contenido con el footer */
+        .main > div {
+            padding-bottom: 50px;
+        }
+        </style>
+        <div class="footer">
+            Seiketsu Consulting &copy; 2023
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
