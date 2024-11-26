@@ -3,8 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def main():
-    st.header("Bienvenido a la página principal")
-    st.write("Este es el contenido de la página Sensor Visualization.")
+    st.image("images/logo.png", width=100)
+    st.header("Sensor visualization")
+    #st.write("Este es el contenido de la página Sensor Visualization.")
     df = pd.read_csv("datasets/filtered_data.csv")
 
     # Add a filter in the sidebar
@@ -15,7 +16,7 @@ def main():
     # Example: Filter by a specific column
     unique_values = df[filter_variable].unique()
     options = ['NONE'] + list(unique_values)
-    selected_value = st.selectbox("Select a value to filter:", options)
+    selected_value = st.selectbox("Select a material to filter:", options)
 
     if selected_value == "NONE":
         filtered_df = df
