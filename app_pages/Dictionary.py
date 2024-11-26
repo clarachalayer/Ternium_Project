@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 def main():
     st.image("images/logo.png", width=100)
     st.header("Dictionary")
+    
+    st.write("This section provides detailed information about various sensors and their respective parameters. Here you can explore the dataset by filtering specific sensors or viewing all available data. The table displays information such as sensor names, variable names, examples, and measurement units, enabling easy identification and understanding of sensor functionality.")
 
     #Data for the table
     df = pd.read_csv("datasets/Dicc_sensors.csv")
@@ -26,12 +28,12 @@ def main():
         filtered_df = df[df[filter_variable] == selected_value]
         st.dataframe(filtered_df)
 
-    #Show table
-    #st.dataframe(df,height = 500)
 
     #Categories image
     st.markdown("### Categories")
-        #Para poner los tipos de coil horizontal
+    
+    st.write("In this section, you can further analyze coil data by selecting a category: Soft, Medium, or Hard. Each category corresponds to a specific dataset, allowing focused exploration of coil characteristics based on material hardness. By selecting a category, you can view and interact with the relevant data to gain insights into the material's properties and processing details. ")
+        
     col1, col2, col3 = st.columns([8, 8, 8])
     selected_df = None
     with col1:
@@ -92,7 +94,7 @@ def main():
 
     # Muestra el DataFrame seleccionado en pantalla completa fuera de las columnas
     if selected_df is not None:
-        st.write("### Datos Seleccionados")
+        st.write("### Data Selected: ")
         st.dataframe(selected_df, use_container_width=True)
 
     # Pie de página

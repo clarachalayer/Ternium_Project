@@ -2,38 +2,38 @@ import streamlit as st
 
 def main():
     st.image("images/ternium_logo.png", width=140) 
-    # Encabezado de la página de perfil
-    st.title("Perfil de Usuario")
-    st.write("Aquí puedes ver la información básica de tu perfil.")
+    # Page header
+    st.title("User Profile")
+    st.write("Here you can view your basic profile information.")
 
-    # Contenedor principal
+    # Main container
     with st.container():
         col1, col2 = st.columns([1, 3])
 
-        # Foto de perfil
+        # Profile picture
         with col1:
-            st.image("images/profile_image.png", width=150)  # Asegúrate de que la imagen esté en la ruta correcta
+            st.image("images/profile_image.png", width=150)  # Ensure the image is in the correct path
 
-        # Información del usuario
+        # User information
         with col2:
             st.subheader("Team 4 Seiketsu")
             st.write("seiketsu@gmail.com")
             st.write("📍 Monterrey, NL")
-            st.write("🔶 Análisis de datos y gestión de proyectos.")
+            st.write("🔶 Data analysis and project management.")
 
     st.markdown("---")
 
-    # Sección de información adicional
-    st.subheader("Información Personal")
-    st.write("**Fecha de nacimiento:** 12 de mayo de 1990")
-    st.write("**Teléfono:** +1 234 567 890")
-    st.write("**Ocupación:** Ingeniera de Software")
-    st.write("**Intereses:** Data Science, Machine Learning, Project Management")
+    # Additional information section
+    st.subheader("Personal Information")
+    st.write("**Date of Birth:** May 12, 1990")
+    st.write("**Phone:** +1 234 567 890")
+    st.write("**Occupation:** Software Engineer")
+    st.write("**Interests:** Data Science, Machine Learning, Project Management")
     
     st.markdown(
     """
     <style>
-    /* Footer fijo en la parte inferior */
+    /* Fixed footer at the bottom */
     .footer {
         position: fixed;
         left: 0;
@@ -45,7 +45,7 @@ def main():
         padding: 10px;
         font-size: 14px;
     }
-    /* Ajuste del padding inferior para que no se superponga el contenido con el footer */
+    /* Adjust bottom padding to prevent content overlap with the footer */
     .main > div {
         padding-bottom: 50px;
     }
@@ -56,5 +56,3 @@ def main():
     """,
     unsafe_allow_html=True
 )
-    
-

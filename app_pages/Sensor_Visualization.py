@@ -18,6 +18,9 @@ def main():
 
     # Página de visualización
     st.title("Sensor Visualization")
+    st.write("This page is designed to help you analyze data from sensors embedded in the manufacturing process. The platform provides an interactive environment to visualize sensor measurements over time and gain insights into production performance.")
+    st.write("In this section, you can filter and explore various sensor data based on material type and sensor tag. The data allows you to monitor how different materials behave under varying conditions, detect any anomalies, and ensure that all materials meet the required quality standards.")
+
 
     # Filtros: Material de salida y sensor (tag)
     material_salida_options = ["NONE", "Show All"] + df['material_salida'].unique().tolist()
@@ -32,7 +35,7 @@ def main():
 
     # Checkbox para seleccionar el estado de Material (diseñado horizontalmente)
     status_filter = st.radio(
-        "Select Material Status:",
+        "Select Sensor Status:",
         options=["Both", "Aprobado", "Defectuoso"],
         index=0,
         horizontal=True  # Opciones en formato horizontal
