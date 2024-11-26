@@ -10,7 +10,7 @@ def main():
     st.write("Este es el contenido de la página Home.")
     
     #Data for the table
-    combined_data = pd.read_csv("datasets\combined_data_cleaned.csv")
+    combined_data = pd.read_csv("datasets/combined_data_cleaned.csv")
     
     # Eliminar la columna "Steel_Type"
     combined_data = combined_data.drop(columns=["Steel_Type"])
@@ -92,6 +92,33 @@ def main():
 
                 # Mostrar el gráfico en Streamlit
                 st.pyplot(fig)
+                
+        st.markdown(
+        """
+        <style>
+        /* Footer fijo en la parte inferior */
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #000000;
+            color: white;
+            text-align: right;
+            padding: 10px;
+            font-size: 14px;
+        }
+        /* Ajuste del padding inferior para que no se superponga el contenido con el footer */
+        .main > div {
+            padding-bottom: 50px;
+        }
+        </style>
+        <div class="footer">
+            Seiketsu Consulting &copy; 2023
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
             
     
 

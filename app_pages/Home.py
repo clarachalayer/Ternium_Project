@@ -5,8 +5,6 @@ from sklearn.svm import SVC
 
 def main():
     st.image("images/logo.png", width=100)
-    st.header("Bienvenido a la página principal")
-    st.write("Este es el contenido de la página Home.")
 
     st.header("Bienvenido.")
     st.write("Este es el contenido de la página Home.")

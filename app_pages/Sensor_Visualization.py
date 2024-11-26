@@ -5,8 +5,6 @@ import numpy as np
 
 def main():
     st.image("images/logo.png", width=100)
-
-    st.header("Sensor visualization")
  
     # Cargar el dataset procesado
     file_path = "datasets/filtered_data.csv"  # Ruta actualizada del archivo procesado
