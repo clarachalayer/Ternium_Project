@@ -14,42 +14,94 @@ def main():
     
     # Eliminar la columna "Steel_Type"
     combined_data = combined_data.drop(columns=["Steel_Type"])
+    #Eliminar la categoria Unknown
+    combined_data = combined_data[~combined_data["steel_category"].str.contains("Unknown", case=False, na=False)]
     
-    # Mostrar el DataFrame actualizado
-    st.dataframe(combined_data)
-
     # Select the 'Slab Weight' column for clustering
     slab_weight_data = combined_data[['Slab Weight']]
+    
+    # Crear un filtro por categoria de acero
+    # Add a filter in the sidebar
+    filter_variable = "steel_category"
 
-    # Create and train the KMeans model
-    model = KMeans(n_clusters=4, random_state=0, n_init='auto')
+    # Example: Filter by a specific column
+    steel_categories = ['NONE'] + list(combined_data['steel_category'].unique())
+    selected_category = st.selectbox("Select the category you want to look for:", steel_categories)
 
-    # Model training
-    model.fit(slab_weight_data)
+    # Filtrar los datos según la categoría seleccionada
+    filtered_df = combined_data if selected_category == "NONE" else combined_data[combined_data['steel_category'] == selected_category]
 
-    # Add cluster labels to the original DataFrame
-    combined_data['Cluster_Weight'] = model.labels_
+    col1, col2 = st.columns([12, 8])
 
-    # Create a scatter plot to visualize the clusters
-    f1 = plt.figure(figsize=(8, 6), dpi=100)
-    for cluster in range(4):  # Loop through each cluster
-        cluster_data = combined_data[combined_data['Cluster_Weight'] == cluster]
-        plt.scatter(cluster_data.index, cluster_data['Slab Weight'], label=f'Cluster {cluster}', s=50)
+    with col2:
+        # Filtro adicional por SGC
+        sgc_values = ['NONE'] + list(filtered_df['SGC'].unique())
+        selected_sgc = col2.selectbox("Selecciona la categoría SGC:", sgc_values)
 
-    # Plot the cluster centers
-    plt.scatter(
-        range(len(model.cluster_centers_)),
-        model.cluster_centers_,
-        color='black',
-        label='Centroids',
-        marker='x',
-        s=100,
-    )
+        if selected_sgc != "NONE":
+            filtered_df = filtered_df[filtered_df['SGC'] == selected_sgc]
 
-    # Add plot details
-    plt.title("Cluster Visualization (Slab Weight)")
-    plt.xlabel("Index")
-    plt.ylabel("Slab Weight")
-    plt.legend()
-    plt.show()
-    st.pyplot(f1)
+        # Mostrar la tabla filtrada en col2
+        col2.dataframe(filtered_df, height=500)
+
+    with col1:
+        st.subheader("Gráfica de Clustering")
+        if filtered_df.empty:
+            st.warning("No hay datos disponibles después de aplicar los filtros.")
+        else:
+            # Seleccionar datos para clustering
+            if "Slab Weight" not in filtered_df.columns:
+                st.error("La columna 'Slab Weight' no existe en los datos.")
+            else:
+                slab_weight_data = filtered_df[['Slab Weight']]
+
+                # Crear y entrenar el modelo KMeans
+                model = KMeans(n_clusters=4, random_state=0, n_init='auto')
+                model.fit(slab_weight_data)
+
+                # Agregar las etiquetas de los clusters al DataFrame
+                filtered_df['Cluster_Weight'] = model.labels_
+
+                # Crear un gráfico de dispersión
+                fig, ax = plt.subplots(figsize=(8, 6), dpi=100)
+                for cluster in range(4):
+                    cluster_data = filtered_df[filtered_df['Cluster_Weight'] == cluster]
+                    ax.scatter(
+                        cluster_data.index,
+                        cluster_data['Slab Weight'],
+                        label=f'Cluster {cluster}',
+                        s=50,
+                    )
+
+                # Graficar los centroides
+                centroids = model.cluster_centers_
+                ax.scatter(
+                    range(len(centroids)),
+                    centroids[:, 0],
+                    color='black',
+                    label='Centroides',
+                    marker='x',
+                    s=100,
+                )
+
+                # Detalles del gráfico
+                ax.set_title("Visualización de Clusters (Slab Weight)")
+                ax.set_xlabel("Index")
+                ax.set_ylabel("Slab Weight")
+                ax.legend()
+
+                # Mostrar el gráfico en Streamlit
+                st.pyplot(fig)
+            
+    
+
+
+
+
+
+
+
+
+
+
+
