@@ -1,8 +1,8 @@
-ID_MATERIAL,Material,Dureza
+Grado,Grupo,Dureza
 A08CR6,HSLA Medios,MEDIUM
 I04CU5,HSLA Medios,MEDIUM
 A22MC4,Grados comerciales Medios,MEDIUM
-SIAL10,Eléctricos,MEDIUM
+SIAL10,Elï¿½ctricos,MEDIUM
 APM45R,HSLA Suaves,MEDIUM
 APM45W,HSLA Suaves,MEDIUM
 22211A,HSLA Suaves,MEDIUM
@@ -32,13 +32,13 @@ C121TM,Grados comerciales Medios,MEDIUM
 I23CU3,Grados comerciales Medios,MEDIUM
 G05BC4,Heat Treatable,MEDIUM
 440FNB,Grados comerciales Medios,MEDIUM
-SIAL20,Eléctricos,MEDIUM
-SIAL50,Eléctricos,MEDIUM
-UBC2E,Eléctricos,MEDIUM
-UBSIOV,Eléctricos,MEDIUM
-EBCML1,Eléctricos,MEDIUM
-C6BPM5,Eléctricos,MEDIUM
-UBC12,Eléctricos,MEDIUM
-E01SI4,Eléctricos,MEDIUM
-E00SI5,Eléctricos,MEDIUM
-EBC392,Eléctricos,MEDIUM
+SIAL20,Elï¿½ctricos,MEDIUM
+SIAL50,Elï¿½ctricos,MEDIUM
+UBC2E,Elï¿½ctricos,MEDIUM
+UBSIOV,Elï¿½ctricos,MEDIUM
+EBCML1,Elï¿½ctricos,MEDIUM
+C6BPM5,Elï¿½ctricos,MEDIUM
+UBC12,Elï¿½ctricos,MEDIUM
+E01SI4,Elï¿½ctricos,MEDIUM
+E00SI5,Elï¿½ctricos,MEDIUM
+EBC392,Elï¿½ctricos,MEDIUM
