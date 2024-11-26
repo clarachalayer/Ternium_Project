@@ -1,37 +1,73 @@
 import streamlit as st
-import matplotlib.pyplot as plt
+import pandas as pd
+import joblib
+from sklearn.svm import SVC
 
 def main():
-    st.image("images/ternium_logo.png", width=100) 
-    st.header("Welcome back!")
-    st.write("It’s time to get to work hard and analyze some data.")
-    st.write("Here is a weekly quick summary")
+    st.image("images/logo.png", width=100)
+    st.header("Bienvenido a la página principal")
+    st.write("Este es el contenido de la página Home.")
 
-    # Datos de ejemplo
-    elementos = ["Elemento 1", "Elemento 2", "Elemento 3", "Elemento 4", "Elemento 5"]
-    serie1 = [10, 20, 30, 40, 30]
-    serie2 = [5, 15, 25, 35, 45]
-    serie3 = [20, 10, 35, 25, 50]
+    st.header("Bienvenido.")
+    st.write("Este es el contenido de la página Home.")
 
-    # Configuración de la gráfica
-    plt.figure(figsize=(8, 5))
-    plt.plot(elementos, serie1, marker='o', linestyle='-', color='#76D7C4', label="Serie 1")  # Color de Serie 1
-    plt.plot(elementos, serie2, marker='o', linestyle='-', color='#5DADE2', label="Serie 2")  # Color de Serie 2
-    plt.plot(elementos, serie3, marker='o', linestyle='-', color='#2874A6', label="Serie 3")  # Color de Serie 3
+    # File uploader
+    uploaded_file = st.file_uploader("Upload a CSV file", type="csv")
 
-    # Personalización de la leyenda y ejes
-    plt.legend(loc="upper left")
-    plt.xlabel("Elementos")
-    plt.ylabel("Valores")
-    plt.ylim(0, 55)
+    if uploaded_file:
+        # Read the uploaded CSV file
+        data = pd.read_csv(uploaded_file)
+        st.write("Uploaded Data:")
+        st.write(data)
 
-    # Fondo redondeado
-    plt.gca().set_facecolor((0.9, 0.9, 0.9, 0.8))  # Color de fondo de la gráfica
-    plt.gcf().patch.set_facecolor((1, 1, 1, 0))     # Fondo transparente alrededor de la gráfica
+        # Define the required variables
+        variables = [
+            "Coil Thickness",
+            "Deceleration",
+            "Transfer Bar Thickness",
+            "FM Final Speed",
+            "STD Cycle Time",
+            "Slab Thickness",
+            "STD Rolling Time",
+            "Slab Weight",
+            "SSP Pacing Time",
+            "1st Accel",
+            "2nd Accel Time",
+            "FCE Pacing Time",
+            "Pacing CountDown Time",
+            "SSP Width Tail Error",
+            "Commander Slab Speed",
+            "FDT",
+            "FCE Waiting Time",
+            "FM Thread Speed",
+            "Transfer Bar Lenght",
+            "SSP Width Head Error",
+            "R1 Rolling Time",
+            "PC Width",
+            "PC Thickness",
+            "Residence time in furnace Actual",
+            "Discharge Temperature Actual Calculated",
+            "Slab Width"
+        ]
 
-    # Mostrar la gráfica en Streamlit
-    st.pyplot(plt)
-    
+        # Check if all required features are in the uploaded file
+        if all(feature in data.columns for feature in variables):
+            # Extract features
+            input_features = data[variables]
+
+            # Load the pre-trained model
+            model = joblib.load("svc_model.pkl")
+
+            # Make predictions
+            data['Prediction'] = model.predict(input_features)
+
+            # Display results
+            st.write("Predictions:")
+            st.write(data[['Prediction']])
+        else:
+            st.error("Please ensure the file contains the required columns.")
+            
+        # Pie de página
     st.markdown(
         """
         <style>
@@ -58,6 +94,3 @@ def main():
         """,
         unsafe_allow_html=True
     )
-    
-
-
