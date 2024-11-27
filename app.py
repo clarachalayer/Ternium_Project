@@ -5,7 +5,7 @@ from app_pages import Home, Sensor_Visualization, Cluster_Specifications, Dictio
 st.set_page_config(
     page_title="Ternium",
     layout="wide",
-    page_icon="😡"
+    page_icon="🗻"
 )
 
 

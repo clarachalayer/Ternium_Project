@@ -116,7 +116,7 @@ def main():
         }
         </style>
         <div class="footer">
-            Seiketsu Consulting &copy; 2023
+            Seiketsu Consulting &copy; 2024
         </div>
         """,
         unsafe_allow_html=True
