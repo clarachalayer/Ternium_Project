@@ -6,8 +6,8 @@ from sklearn.cluster import KMeans
 
 def main():
     st.image("images/logo.png", width=100)
-    st.header("Cluster pages")
-    st.write("Este es el contenido de la página Home.")
+    st.header("Cluster Specifications")
+    st.write("This section analyzes and visualizes slab weight, identifying patterns in the data and classifying slabs into different clusters to facilitate process control and decision-making. Here you can filter data by steel category (Steel Category) or SGC code, visualize clustering results applied to slab weights, and identify centroids and groups to optimize processes related to material quality.")
     
     #Data for the table
     combined_data = pd.read_csv("datasets/combined_data_cleaned.csv")
@@ -36,7 +36,7 @@ def main():
     with col2:
         # Filtro adicional por SGC
         sgc_values = ['NONE'] + list(filtered_df['SGC'].unique())
-        selected_sgc = col2.selectbox("Selecciona la categoría SGC:", sgc_values)
+        selected_sgc = col2.selectbox("Select the category you want for SGC:", sgc_values)
 
         if selected_sgc != "NONE":
             filtered_df = filtered_df[filtered_df['SGC'] == selected_sgc]
@@ -45,7 +45,7 @@ def main():
         col2.dataframe(filtered_df, height=500)
 
     with col1:
-        st.subheader("Gráfica de Clustering")
+        st.subheader("Clustering Graphic")
         if filtered_df.empty:
             st.warning("No hay datos disponibles después de aplicar los filtros.")
         else:
@@ -85,13 +85,14 @@ def main():
                 )
 
                 # Detalles del gráfico
-                ax.set_title("Visualización de Clusters (Slab Weight)")
+                ax.set_title("Clusters Visualization (Slab Weight)")
                 ax.set_xlabel("Index")
                 ax.set_ylabel("Slab Weight")
                 ax.legend()
 
                 # Mostrar el gráfico en Streamlit
                 st.pyplot(fig)
+
                            
     # Pie de página
     st.markdown(

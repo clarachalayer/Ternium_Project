@@ -8,8 +8,12 @@ def main():
     file_path = 'datasets/evaluated_data.csv'  # Asegúrate de que la ruta del archivo sea correcta
     df = pd.read_csv(file_path)
 
+    # Eliminar las columnas "X" y "Y"
+    if 'X' in df.columns and 'Y' in df.columns:
+        df = df.drop(columns=['X', 'Y'])
+
     # Título de la aplicación
-    st.title("Mahalanobis Distance for sensor's Classification")
+    st.title("Mahalanobis Distance for Sensor's Classification")
 
     # Mostrar el conjunto de datos
     st.write("""
@@ -62,7 +66,7 @@ def main():
     - \(\Sigma^{-1}\) is the inverse covariance matrix of the approved data.
     """)
     
-     # Pie de página
+    # Pie de página
     st.markdown(
         """
         <style>
@@ -89,3 +93,5 @@ def main():
         """,
         unsafe_allow_html=True
     )
+
+

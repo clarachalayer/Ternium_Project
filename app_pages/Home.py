@@ -1,71 +1,55 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from sklearn.svm import SVC
 
 def main():
     st.image("images/logo.png", width=100)
 
-    st.header("Bienvenido.")
-    st.write("Este es el contenido de la página Home.")
+    # Título y subtítulo
+    st.header("Welcome to Seiketsu Plataform!")
+    st.subheader('"Empowering businesses to achieve excellence through actionable insights and cutting-edge digital solutions."')
+    st.write("This platform is designed to support process control and decision-making by leveraging data from hot rolling sensors. Our goal is to optimize processes, reduce defects on coils, and enhance operational efficiency.")
 
-    # File uploader
+    # Carga de archivo
     uploaded_file = st.file_uploader("Upload a CSV file", type="csv")
 
     if uploaded_file:
-        # Read the uploaded CSV file
+        # Leer el archivo cargado
         data = pd.read_csv(uploaded_file)
-        st.write("Uploaded Data:")
-        st.write(data)
 
-        # Define the required variables
+        # Mostrar los datos cargados en un formato estilizado
+        st.write("Uploaded Data:")
+        st.dataframe(data)  # Mejora la visualización de los datos
+
+        # Definir las variables necesarias
         variables = [
-            "Coil Thickness",
-            "Deceleration",
-            "Transfer Bar Thickness",
-            "FM Final Speed",
-            "STD Cycle Time",
-            "Slab Thickness",
-            "STD Rolling Time",
-            "Slab Weight",
-            "SSP Pacing Time",
-            "1st Accel",
-            "2nd Accel Time",
-            "FCE Pacing Time",
-            "Pacing CountDown Time",
-            "SSP Width Tail Error",
-            "Commander Slab Speed",
-            "FDT",
-            "FCE Waiting Time",
-            "FM Thread Speed",
-            "Transfer Bar Lenght",
-            "SSP Width Head Error",
-            "R1 Rolling Time",
-            "PC Width",
-            "PC Thickness",
-            "Residence time in furnace Actual",
-            "Discharge Temperature Actual Calculated",
+            "Coil Thickness", "Deceleration", "Transfer Bar Thickness", "FM Final Speed", "STD Cycle Time",
+            "Slab Thickness", "STD Rolling Time", "Slab Weight", "SSP Pacing Time", "1st Accel", "2nd Accel Time",
+            "FCE Pacing Time", "Pacing CountDown Time", "SSP Width Tail Error", "Commander Slab Speed", "FDT",
+            "FCE Waiting Time", "FM Thread Speed", "Transfer Bar Lenght", "SSP Width Head Error", "R1 Rolling Time",
+            "PC Width", "PC Thickness", "Residence time in furnace Actual", "Discharge Temperature Actual Calculated",
             "Slab Width"
         ]
 
-        # Check if all required features are in the uploaded file
+        # Verificar si todas las columnas requeridas están presentes
         if all(feature in data.columns for feature in variables):
-            # Extract features
+            # Extraer las características
             input_features = data[variables]
 
-            # Load the pre-trained model
+            # Cargar el modelo pre-entrenado
             model = joblib.load("svc_model.pkl")
 
-            # Make predictions
+            # Hacer predicciones
             data['Prediction'] = model.predict(input_features)
 
-            # Display results
+            # Mostrar los resultados de las predicciones de una forma más visual
             st.write("Predictions:")
-            st.write(data[['Prediction']])
+            st.dataframe(data[['Prediction']].style.applymap(lambda x: 'background-color: yellow' if x == 0 else 'background-color: lightgreen'))  # Colorear predicciones
+
         else:
             st.error("Please ensure the file contains the required columns.")
-            
-        # Pie de página
+
+    # Footer
     st.markdown(
         """
         <style>
