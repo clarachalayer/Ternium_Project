@@ -34,7 +34,7 @@ def main():
     # Checkbox para seleccionar el estado de Material (diseñado horizontalmente)
     status_filter = st.radio(
         "Select Sensor Status:",
-        options=["Both", "Approved", "Defective"],
+        options=["Both", "Aprobado", "Defectuoso"],
         index=0,
         horizontal=True  # Opciones en formato horizontal
     )
@@ -51,7 +51,7 @@ def main():
         # Función para generar gráficos con colores basados en Material status
         def plot_graph(x_values, y_values, title, status):
             # Seleccionar el color basado en Material status
-            color = 'green' if status == 'Approved' else 'red'
+            color = 'green' if status == 'Aprobado' else 'red'
             fig, ax = plt.subplots(figsize=(12, 6))
             ax.plot(x_values, y_values, marker='o', color=color)
             ax.set_title(title, fontsize=16)
