@@ -1,16 +1,19 @@
-# Ignorar el entorno virtual
+# Environnements virtuels
+st_ternium/
 ternium_webapp/
+.venv/
+venv/
 .env/
 
-# Archivos temporales de Python
+# Fichiers temporaires Python
 *.pyc
 *.pyo
 __pycache__/
 
-# Archivos de configuración específicos del editor
+# Configuration des éditeurs
 .vscode/
 .idea/
 
-# Archivos grandes o sensibles
+# Divers
 *.log
 .DS_Store
